@@ -1,0 +1,22 @@
+// C++ code
+//
+int led=9;
+int pot= A0;
+void setup()
+{
+  pinMode(3, OUTPUT);
+  pinMode(pot,INPUT);
+  digitalWrite(led,LOW);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int potVal=analogRead(pot);
+  int val=map(potVal,0,1023,0,255);
+  Serial.print("val: ");
+  Serial.println(val);
+  digitalWrite(led,HIGH);
+  analogWrite(led,val);
+  
+}

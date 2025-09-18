@@ -1,0 +1,80 @@
+// C++ code
+//
+int frontIn=2;
+int frontOut=3;
+int leftIn=4;
+int leftOut=5;
+int rightIn=6;
+int rightOut=7;
+int FspeedPin=8,RspeedPin=10,LspeedPin=9;
+void setup()
+{
+  pinMode(frontIn, OUTPUT);
+  pinMode(frontOut, OUTPUT);
+  pinMode(leftIn, OUTPUT);
+  pinMode(leftOut, OUTPUT);
+  pinMode(rightIn, OUTPUT);
+  pinMode(rightOut, OUTPUT);
+  pinMode(FspeedPin, OUTPUT);
+  pinMode(LspeedPin, OUTPUT);
+  pinMode(RspeedPin, OUTPUT);
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  char c;
+  if(Serial.available()>0)
+  {	 c=Serial.read();
+   
+  }
+ if(c=='w')
+ {
+  Serial.println('W');
+  digitalWrite(leftIn,HIGH);
+  digitalWrite(leftOut,LOW);
+  digitalWrite(rightIn,LOW);
+  digitalWrite(rightOut,HIGH);
+  digitalWrite(LspeedPin,HIGH);
+  digitalWrite(RspeedPin,HIGH);
+ }
+ else if(c=='s')
+ {
+   Serial.println('S');
+ 	digitalWrite(leftIn,LOW);
+  digitalWrite(leftOut,HIGH);
+  digitalWrite(rightIn,HIGH);
+  digitalWrite(rightOut,LOW);
+  digitalWrite(LspeedPin,HIGH);
+  digitalWrite(RspeedPin,HIGH);
+ 
+ }
+ else if(c=='a')
+ {
+   Serial.println('A');
+ 	digitalWrite(frontIn,LOW);
+   digitalWrite(frontOut,HIGH);
+   digitalWrite(FspeedPin,HIGH);
+   digitalWrite(leftIn,HIGH);
+  digitalWrite(leftOut,LOW);
+  digitalWrite(rightIn,HIGH);
+  digitalWrite(rightOut,LOW);
+  digitalWrite(LspeedPin,HIGH);
+  digitalWrite(RspeedPin,HIGH);
+ 
+ }
+ else if(c=='d')
+ {
+   Serial.println('D');
+  digitalWrite(frontIn,HIGH);
+   digitalWrite(frontOut,LOW);
+   digitalWrite(FspeedPin,HIGH);
+   digitalWrite(leftIn,LOW);
+  digitalWrite(leftOut,HIGH);
+  digitalWrite(rightIn,LOW);
+  digitalWrite(rightOut,HIGH);
+  digitalWrite(LspeedPin,HIGH);
+  digitalWrite(RspeedPin,HIGH);
+ }
+}

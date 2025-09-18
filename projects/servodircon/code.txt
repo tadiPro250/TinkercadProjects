@@ -1,0 +1,19 @@
+#include <Servo.h>
+Servo s;
+void setup()
+{
+  pinMode(A0,INPUT);
+  s.attach(9);
+  Serial.begin(9600);
+}
+void loop()
+{
+  int pot=analogRead(pot);
+  int deg=map(pot,0,1023,0,180);
+  Serial.print("Degree: ");
+  Serial.println(deg);
+  for(int i=0;i<deg;i++)
+  {
+    s.write(i);
+  }
+}

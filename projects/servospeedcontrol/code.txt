@@ -1,0 +1,51 @@
+// C++ code
+//
+#include<Servo.h>
+Servo s1;
+Servo s2;
+int trigpin=10;
+int echopin=9;
+int pot=A3;
+int distance=0;
+int duration=0;
+void setup()
+{
+  pinMode(trigpin, OUTPUT);
+  pinMode(echopin,INPUT);
+  pinMode(pot,INPUT);
+  
+  s1.attach(3);
+  s2.attach(6);
+  s1.write(0);
+  s2.write(0);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int potval=analogRead(pot);
+  int delayp=map(potval,0,1023,5,50);
+  digitalWrite(trigpin,LOW);
+  delay(20);
+  digitalWrite(trigpin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin,LOW);
+  duration=pulseIn(echopin,HIGH);
+  distance=duration*0.0343/2;
+  Serial.println(distance);
+  int delayu=map(distance,0,332,5,50);
+  for(int i=0;i<=180;i++)
+  {
+  	s1.write(i);
+    delay(delayp);
+    s2.write(i);
+    delay(delayu);
+  }
+  for(int i=180;i>=0;i--)
+  {
+     s1.write(i);
+    delay(delayp);
+    s2.write(i);
+    delay(delayu);
+  }
+}

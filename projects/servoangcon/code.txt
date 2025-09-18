@@ -1,0 +1,28 @@
+#include <Servo.h>
+Servo S1;
+Servo S2;
+int val=0;
+int nval=0;
+void setup()
+{
+  S1.attach(9);
+  S2.attach(8);
+  Serial.begin(9600);
+}
+void loop(){
+  if(Serial.available()>0){
+    Serial.println("Enter angle of rotation for the motor");
+    val=Serial.parseInt();
+    Serial.print("Angle of rotation: ");
+    Serial.println(val);
+    nval=180-val;
+  }
+  for(int i=0;i<val;i++){
+  	  S1.write(i);
+  }
+  for(int i=nval;i>=0;i--)
+  {
+     S1.write(i); 
+  }
+  delay(100);
+}

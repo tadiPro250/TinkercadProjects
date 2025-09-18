@@ -1,0 +1,55 @@
+// C++ code
+//
+int ledr=10;
+int ledy=9;
+int ledg=8;
+int trigpin=6;
+int echopin=7;
+int distance=0;
+int duration=0;
+void setup()
+{
+  pinMode(echopin, INPUT);
+  pinMode(trigpin, OUTPUT);
+  pinMode(ledr, OUTPUT);
+  pinMode(ledy, OUTPUT);
+  pinMode(ledg, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(trigpin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigpin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin, LOW);
+  duration = pulseIn(echopin, HIGH);
+  distance=duration*0.0334/2;
+  Serial.print("distance: ");
+  Serial.println(distance);
+  if(distance>0 && distance<=100)
+  {
+    digitalWrite(ledr,HIGH);
+    digitalWrite(ledy,HIGH);
+    digitalWrite(ledg,HIGH);
+  }
+  else if(distance>100 && distance<=175)
+  {
+    digitalWrite(ledr,LOW);
+    digitalWrite(ledy,HIGH);
+    digitalWrite(ledg,HIGH);
+  }
+  else if(distance>175 && distance<=250)
+  {
+    digitalWrite(ledg,HIGH);
+    digitalWrite(ledr,LOW);
+    digitalWrite(ledy,LOW);
+  }
+  else
+  {
+    digitalWrite(ledg,LOW);
+    digitalWrite(ledy,LOW);
+    digitalWrite(ledr,LOW);
+  }
+}

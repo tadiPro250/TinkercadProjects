@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[10];
+    int target;
+    cout<<"Enter target number: ";
+    cin>>target;
+    for(int i=0;i<10;i++)
+    {
+        arr[i]=i+1; // Filling array with first 10 natural numbers
+    }
+    for(int i=0;i<10;i++)
+    {
+        int sum=0;
+        for(int j=i;j<10;j++)
+        {
+            sum+=arr[j];
+            if(sum==target)
+            {
+                cout<<"Consecutive numbers from index "<<i<<" to "<<j<<" sum to "<<target<<endl;
+            }
+            if(sum>target)
+                break;
+        }
+    }
+}
+
+// This code finds and prints all sequences of consecutive numbers in an array that sum to a given target number.
+// The array is filled with the first 10 natural numbers for demonstration purposes.
+// The user is prompted to enter the target number.
+// Example: If the target number is 15, the output will show sequences like 1 to 5, 4 to 6, etc.
+// Note: The array size and contents can be modified as needed.
+// --- IGNORE ---

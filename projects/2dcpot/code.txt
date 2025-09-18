@@ -1,0 +1,67 @@
+
+int enA = 11;
+int enB = 10;
+int in1 = 9;
+int in2 = 8;
+int in3 = 6;
+int in4 = 5;
+int num;
+int pot = A5;
+void setup()
+{
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(pot, INPUT);
+  digitalWrite(in1, 0);
+  digitalWrite(in2, 0);
+  digitalWrite(in3, 0);
+  digitalWrite(in4, 0);  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int potval=analogRead(A5);
+  int rpm = map(potval, 0,1023, 0,255);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(enA, rpm);
+  analogWrite(enB, rpm);
+}
+
+void directionControl()
+{
+  digitalWrite(enA, HIGH);
+  digitalWrite(enB, HIGH);
+  
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  delay(2000);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  delay(2000);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+void speedControl()
+{
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  int spd = map(num, 0, 16174, 0, 255);
+  analogWrite(enA, spd);
+  analogWrite(enB, spd);
+}
